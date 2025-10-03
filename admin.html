@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finder Admin Panel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-bg: #f6f8fa;
+            --panel-bg: #ffffff;
+            --header-bg: linear-gradient(135deg, #24292e 0%, #32383e 100%);
+            --text-primary: #24292e;
+            --text-secondary: #586069;
+            --accent-color: #0366d6;
+            --border-color: #e1e4e8;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            --error-color: #d73a49;
+            --success-color: #28a745;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .admin-panel {
+            width: 100%;
+            max-width: 1200px;
+            /* Increased max-width for more content */
+            background-color: var(--panel-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 30px var(--shadow-color);
+            overflow: hidden;
+        }
+
+        header {
+            background: var(--header-bg);
+            color: #ffffff;
+            padding: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        main {
+            padding: 30px;
+        }
+
+        .header-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .github-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #24292e;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s ease;
+        }
+
+        .github-btn:hover {
+            background-color: #444c56;
+        }
+
+        /* New Panel Layout */
+        .panels-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+
+        .panel {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .panel h2 {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* File List Panel */
+        .file-panel {
+            flex-basis: 100%;
+            /* Take full width on first row */
+        }
+
+        #file-list {
+            list-style-type: none;
+        }
+
+        #file-list li {
+            padding: 15px 10px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            transition: background-color 0.2s ease;
+        }
+
+        #file-list li:hover {
+            background-color: var(--primary-bg);
+        }
+
+        #file-list li:last-child {
+            border-bottom: none;
+        }
+
+        .file-info a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .file-info a:hover {
+            color: var(--accent-color);
+        }
+
+        .file-info::before {
+            content: '\f15b';
+            /* Font Awesome file icon */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            margin-right: 15px;
+            font-size: 1.2em;
+            color: var(--text-secondary);
+        }
+
+        li.dir .file-info::before {
+            content: '\f07b';
+            /* Font Awesome folder icon */
+            color: #f9c74f;
+        }
+
+        li.img .file-info::before {
+            content: '\f1c5';
+            /* Font Awesome image icon */
+            color: #577590;
+        }
+
+        li.doc .file-info::before {
+            content: '\f1c2';
+            /* Font Awesome word doc icon */
+            color: #277da1;
+        }
+
+        /* User Panel */
+        .user-list {
+            list-style: none;
+        }
+
+        .user-list li {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .user-list li:last-child {
+            border-bottom: none;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--border-color);
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .user-details .name {
+            font-weight: 500;
+        }
+
+        .user-details .email {
+            font-size: 0.9em;
+            color: var(--text-secondary);
+        }
+
+        /* Chart Panel */
+        .chart-container {
+            width: 100%;
+            height: 200px;
+        }
+
+        .chart-container svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="admin-panel">
+        <header>
+            <h1>Finder Admin Panel 📂</h1>
+            <p>A dashboard for the 'Finder' repository.</p>
+        </header>
+
+        <main>
+            <div class="header-buttons">
+                <a href="https://github.com/vishalsinha2004/Finder/upload/main/files" target="_blank"
+                    class="github-btn">
+                    Upload File
+                </a>
+            </div>
+
+            <div class="panels-container">
+                <div class="panel file-panel">
+                    <ul id="file-list">
+                        <li class="dir">
+                            <span class="file-info"><a
+                                    href="https://github.com/vishalsinha2004/Finder/tree/main/files">Files</a></span>
+                        </li>
+
+                </div>
+
+
+
+        </main>
+
+
+    </div>
+
+
+</body>
+
+</html>
