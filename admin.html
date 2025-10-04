@@ -42,7 +42,6 @@
         .admin-panel {
             width: 100%;
             max-width: 1200px;
-            /* Increased max-width for more content */
             background-color: var(--panel-bg);
             border-radius: 12px;
             box-shadow: 0 8px 30px var(--shadow-color);
@@ -75,7 +74,8 @@
             margin-bottom: 30px;
         }
 
-        .github-btn {
+        .github-btn,
+        .mongo-btn {
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -88,11 +88,11 @@
             transition: background-color 0.2s ease;
         }
 
-        .github-btn:hover {
+        .github-btn:hover,
+        .mongo-btn:hover {
             background-color: #444c56;
         }
 
-        /* New Panel Layout */
         .panels-container {
             display: flex;
             flex-wrap: wrap;
@@ -118,10 +118,9 @@
             gap: 10px;
         }
 
-        /* File List Panel */
+        /* File Panel */
         .file-panel {
             flex-basis: 100%;
-            /* Take full width on first row */
         }
 
         #file-list {
@@ -153,125 +152,49 @@
         .file-info a:hover {
             color: var(--accent-color);
         }
-
-        .file-info::before {
-            content: '\f15b';
-            /* Font Awesome file icon */
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            margin-right: 15px;
-            font-size: 1.2em;
-            color: var(--text-secondary);
-        }
-
-        li.dir .file-info::before {
-            content: '\f07b';
-            /* Font Awesome folder icon */
-            color: #f9c74f;
-        }
-
-        li.img .file-info::before {
-            content: '\f1c5';
-            /* Font Awesome image icon */
-            color: #577590;
-        }
-
-        li.doc .file-info::before {
-            content: '\f1c2';
-            /* Font Awesome word doc icon */
-            color: #277da1;
-        }
-
-        /* User Panel */
-        .user-list {
-            list-style: none;
-        }
-
-        .user-list li {
-            display: flex;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .user-list li:last-child {
-            border-bottom: none;
-        }
-
-        .avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: var(--border-color);
-            margin-right: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: var(--accent-color);
-        }
-
-        .user-details .name {
-            font-weight: 500;
-        }
-
-        .user-details .email {
-            font-size: 0.9em;
-            color: var(--text-secondary);
-        }
-
-        /* Chart Panel */
-        .chart-container {
-            width: 100%;
-            height: 200px;
-        }
-
-        .chart-container svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        .error-message {
-            color: var(--error-color);
-            font-weight: bold;
-            text-align: center;
-        }
     </style>
 </head>
 
 <body>
     <div class="admin-panel">
         <header>
-            <h1>Finder Admin Panel 📂</h1>
+            <h1>Finder dashboard 📂</h1>
             <p>A dashboard for the 'Finder' repository.</p>
         </header>
 
         <main>
             <div class="header-buttons">
-                <a href="https://github.com/vishalsinha2004/Finder/upload/main/files" target="_blank"
-                    class="github-btn">
-                    Upload File
+                <a href="https://github.com/vishalsinha2004/Finder/upload/main/files" target="_blank" class="github-btn">
+                     Upload File
                 </a>
             </div>
 
             <div class="panels-container">
+                <!-- Files Panel -->
                 <div class="panel file-panel">
+                    <h2><i class="fa-solid fa-folder"></i> Files</h2>
                     <ul id="file-list">
                         <li class="dir">
-                            <span class="file-info"><a
-                                    href="https://github.com/vishalsinha2004/Finder/tree/main/files">Files</a></span>
+                            <span class="file-info">
+                                <a href="https://github.com/vishalsinha2004/Finder/tree/main/files" target="_blank">
+                                    Files Directory
+                                </a>
+                            </span>
                         </li>
-
+                    </ul>
                 </div>
 
-
-
+                <!-- MongoDB Messages Panel -->
+                <div class="panel">
+                    <h2><i class="fa-solid fa-database"></i> Messages (MongoDB)</h2>
+                    <a href="https://cloud.mongodb.com/v2/68c9b858d03c8939877d1be3#/metrics/replicaSet/68c9b8abab7d84367574c4b3/explorer/finderDB/messages/find"
+                        target="_blank" class="mongo-btn">
+                        <i class="fa-solid fa-database"></i> Open Messages Collection
+                    </a>
+                </div>
+            </div>
         </main>
-
-
     </div>
-
-
 </body>
 
 </html>
